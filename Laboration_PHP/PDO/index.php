@@ -31,10 +31,10 @@ elseif($page == 'blogg') {
 		foreach($model as $key => $slug) {
 			if ($model[$key]['slug'] == $post) {
 				$template = "single-blog-post";
-				$title = $model[$key]['title'];
-				$author = $model[$key]['author'];
-				$date = $model[$key]['date'];
-				$message = $model[$key]['text'];
+				$title = $model[$key]['Headline'];
+				$author = $model[$key]['Name'];
+				$date = $model[$key]['Creation_time'];
+				$message = $model[$key]['Text'];
 			}
 		}
 	}
