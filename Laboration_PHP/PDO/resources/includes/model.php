@@ -14,29 +14,24 @@ $dsn = "mysql:host=$host;dbname=$dbname;charset=utf8mb4";
 //Skapa PDO projektet Hur sätter man in UFT-8 i PDO?
 $pdo = new PDO($dsn, $user, $password);
 
-
-
-    //Skapar vår Model-array.
-    if($pdo) {
+  //Skapar vår Model-array.
+  if($pdo) {
     $model = array();
     foreach($pdo->query("SELECT P.ID, P.Slug, P.Headline, CONCAT(U.First_name, ' ', U.Last_name) AS Name, P.Creation_time, P.Text FROM Posts AS P JOIN users AS U ON U.ID ORDER BY P.Creation_time DESC") as $row) {
-      print_r($row);
+      $model += array(
+        $row['ID'] => array(
+          'slug' => $row['Slug'],
+          'title' => $row['Headline'],
+          'author' => $row['Name'],
+          'date' => $row['Creation_time'],
+          'text' => $row['Text']
+        )
+      );
     }
-    if($pdo) {
-    $model += array(
-          $row['ID'] => array(
-            'slug' => $row['Slug'],
-            'title' => $row['Headline'],
-            'author' => $row['Name'],
-            'date' => $row['Creation_time'],
-            'text' => $row['Text']
-          )
-        );
   }
-else
-    print_r($pdo->errorInfo());
+else{
+  print_r($pdo->errorInfo());
 }
-
 
 /*
 $oldmodel = array(
