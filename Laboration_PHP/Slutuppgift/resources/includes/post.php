@@ -54,10 +54,10 @@ if ($pdo) {
     // Här kollar vi om vi har skrivit någonting i post rutan, och sedan kan posta det som står i rutan.
     if (isset($_POST['submit'])) {
         $user = $_POST['author']; //Här skickar vi användarnamnet på han som skrev posten till servern.
-        $headline = $_POST['title']; //Här skickar vi titeln på posten till servern.
+        $headline = $_POST['title']; //Här skickar vi den valda titeln på posten till servern.
         $headline = trim($headline);
 
-        $slug = slugify($headline); //Här skapar vi en slug utav titeln på posten, och skickar det till servern.
+        $slug = slugify($headline); //Här skapars en slug utav titeln på posten, och skickar den till servern.
 
         $text = $_POST['message']; //Här skickas själva texten i posten till servern.
 
@@ -72,24 +72,9 @@ if ($pdo) {
         /* databasen. Tänk på att namn på tabell & kolumner i er **/
         /* databas kan skiljas något från det jag angivit i $sql. */
         /**********************************************************/
-        // Ansluter till databasen och använder frågor.
-        if($pdo) {
-    // Skapar vår model-array
-    $model = array();
 
-    foreach($pdo->query($sql) as $row) {
-        $model += array(
-            $row['ID'] => array(
-                'slug' => $row['Slug'],
-                'title' => $row['Headline'],
-                'author' => $row['Name'],
-                'date' => $row['Creation_time'],
-                'text' => $row['Text']
-            )
-        );
-    }
-}
-        if(thing) {
+
+        if($pdo->query($sql)) {
             $message = 'Du har lyckats lägga upp ett inlägg';
         }
 
@@ -98,7 +83,7 @@ if ($pdo) {
         }
 
     }
-}
+
 else {
     print_r($pdo->errorInfo());
 }

@@ -3,7 +3,7 @@ require 'resources/includes/db_conn.php'; // Kopiera all kod som ligger inne i d
 
 if ($pdo) {
 
-    // Det vi gör nu är att vi skapar en ny variabel som tillåter oss att dra en post direkt från databasen och visa den.
+    // Det vi gör nu är att vi skapar en ny variabel som tillåter oss att dra en post direkt från databasen och visa den utifall vi söker efter den.
     $sql = 'SELECT P.ID, P.Slug, P.Headline, CONCAT(U.Firstname, " ", U.Lastname) AS Name, P.Creation_time, P.Text FROM Posts AS P JOIN Users AS U ON U.ID = P.User_ID ORDER BY P.Creation_time DESC';
 
     // Vi kollar utifall vi söker efter någonting.
